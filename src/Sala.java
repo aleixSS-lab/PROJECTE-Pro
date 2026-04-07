@@ -23,9 +23,7 @@ public abstract class Sala {
 //	tirada
 		//Las tiradas se realizan obteniendo un numero del 1 al 12.
 		//Si el valor es <= que la fuerza del personaje tiene exito si no falla.
-	public int numAleatoriTirada() {
-		int max = 12;
-		int min = 1;
-		return (int) (Math.random() * (max - min + 1) + min);
+	static public int numAleatoriTirada() {
+		return (int) (Math.random() * (12 - 1 + 1) + 1);
 	}
 }

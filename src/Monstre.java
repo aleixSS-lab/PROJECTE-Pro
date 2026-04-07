@@ -33,11 +33,6 @@ public class Monstre implements Combatent {
 	}
 	
 //	Metodos
-	
-	
-		
-	
-	
 	public int calcularAtac() {
 		//Devuelve num aleatorio 1 - valor actual vidaMonstre
 	int max = vida;
@@ -45,6 +40,10 @@ public class Monstre implements Combatent {
 	
 	return (int) (Math.random() * (max - min + 1) + min);	
 	}
+
+// GET
+
+// SETTERS
 	
 //	ToString
 	

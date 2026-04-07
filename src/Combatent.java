@@ -19,4 +19,5 @@ public interface Combatent {
 //		else {
 //			return false;
 //		}	
+
 }

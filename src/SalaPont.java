@@ -14,15 +14,22 @@ public class SalaPont extends Sala {
 		
 				int tiradaAgilitat = numAleatoriTirada();
 				//si tiene exito --> TRUE
+
+				System.out.println("  [Pont] Tirada d'agilitat: " + tiradaAgilitat + " (necessites <= " + p.agilitat + ")");
 				
-				if(tiradaAgilitat <=  p.agiitat) {
+				if(tiradaAgilitat <=  p.agilitat) {
+					System.out.println("Has conseguido cruzar el puente con éxito.");
 					return true;
 				}
 				//si falla --> -1 de vida y FALSE
 				else {
-					p.vida --;
+					p.rebreDany(1);
+					System.out.println("Has fallado al cruzar el puente -1 de vida.");
 					return false;
 				}
 //				Fin metodo
 	}
+
+
+	
 }

@@ -15,7 +15,7 @@ public class Tresor {
 	}
 	
 	
-	// Métodos de getter i setter de nom, valor y pes.
+	// Métodos de getter i setter de nom, valor y pes. || Se necesitan de verdad? y para que? || Se pueden eliminar?
 	public String setNom(String n) {
 		 return this.nom = n;
 	}
@@ -35,8 +35,8 @@ public class Tresor {
 	public double getPes(String p) {
 		return this.pes;
 	}
+
 //	ToString
-	
 	@Override
 		public String toString() {
 			

@@ -15,7 +15,26 @@ public class Tresor {
 	}
 	
 	
+	// Métodos de getter i setter de nom, valor y pes.
+	public String setNom(String n) {
+		 return this.nom = n;
+	}
+	public int setValor(int v) {
+		 return this.valor = v;
+	}
+	public double setPes(double p) {
+		 return this.pes = p;
+	}
 	
+	public String getNom(String n) {
+		return this.nom;
+	}
+	public int getValor(String v) {
+		return this.valor;
+	}
+	public double getPes(String p) {
+		return this.pes;
+	}
 //	ToString
 	
 	@Override

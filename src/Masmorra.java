@@ -17,6 +17,9 @@ public  class Masmorra {
      * @param monstres array de monstres
      * @param p Personatge que jugarà la masmorra
      */
+    
+//    Mirar los arrays
+    
     public static void inicialitzar(int fil, int col, Tresor[] tresors, Monstre[] monstres, Personatge p) {
         files = fil;
         columnes = col;

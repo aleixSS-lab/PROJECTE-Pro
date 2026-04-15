@@ -1,13 +1,13 @@
 public class Masmorra {
 
     // __ Atributs estàtics __
-    private static Sala[][] masmorra;
-    private static Tresor[] tresors;
-    private static Monstre[] monstres;
-    private static Personatge personatge;
-    private static int files;
-    private static int columnes;
-    private static String causaMort = null; // "monstre" o "pont"
+    protected static Sala[][] masmorra;
+    protected static Tresor[] tresors;
+    protected static Monstre[] monstres;
+    protected static Personatge personatge;
+    protected static int files;
+    protected static int columnes;
+    protected static String causaMort = null; // "monstre" o "pont"
 
     // __ Inicialitzacio __
 
@@ -29,7 +29,7 @@ public class Masmorra {
 
     // __ Generació de la Masmorra __
 
-    private static void generarMasmorra() {
+    protected static void generarMasmorra() {
         for (int i = 0; i < files; i++) {
             for (int j = 0; j < columnes; j++) {
                 Tresor t = tresorAleatori();
@@ -48,14 +48,14 @@ public class Masmorra {
         }
     }
 
-    private static Tresor tresorAleatori() {
+    protected static Tresor tresorAleatori() {
         if (Math.random() < 0.5 && tresors.length > 0) {
             return tresors[(int) (Math.random() * tresors.length)];
         }
         return null;
     }
 
-    private static Monstre monstreAleatori() {
+    protected static Monstre monstreAleatori() {
         if (Math.random() < 0.5 && monstres.length > 0) {
             return monstres[(int) (Math.random() * monstres.length)];
         }
@@ -214,7 +214,7 @@ public class Masmorra {
         return d == 'N' || d == 'S' || d == 'E' || d == 'O';
     }
 
-    private static int percentatgeExplorat() {
+    protected static int percentatgeExplorat() {
         int explorades = 0;
         for (int i = 0; i < files; i++)
             for (int j = 0; j < columnes; j++)
@@ -222,14 +222,14 @@ public class Masmorra {
         return (explorades * 100) / (files * columnes);
     }
 
-    private static int numTresors() {
+    protected static int numTresors() {
         int count = 0;
         for (Tresor t : personatge.equipament)
             if (t != null) count++;
         return count;
     }
 
-    private static int totalMonedes() {
+    protected static int totalMonedes() {
         int total = 0;
         for (Tresor t : personatge.equipament)
             if (t != null) total += t.valor;

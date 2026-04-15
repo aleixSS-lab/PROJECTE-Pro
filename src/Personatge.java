@@ -152,19 +152,19 @@ public class Personatge extends Masmorra implements Combatent{
 		salaActual.intentarSortir(Personatge.this);
 			if(salaActual.intentarSortir(Personatge.this) == true) {
 				// FER ELS MOVIMENTS CORRESPONENTS A CADA DIRECCIÓ
-		switch (direccio) {
-			case 'N':
-				this.posicio[0]--;
-				break;
-			case 'S':
-				this.posicio[0]++;
-				break;
-			case 'E':
-				this.posicio[1]++;
-				break;
-			case 'O':
-				this.posicio[1]--;
-				break;
+			switch (direccio) {
+				case 'N':
+					this.posicio[0]--;
+					break;
+				case 'S':
+					this.posicio[0]++;
+					break;
+				case 'E':
+					this.posicio[1]++;
+					break;
+				case 'O':
+					this.posicio[1]--;
+					break;
 		}	
 
 		if (getSalaActual().monstre != null && getSalaActual().monstre.estaViu()) {

@@ -1,4 +1,4 @@
-public class Masmorra {
+public  class Masmorra {
 
     // __ Atributs estàtics __
     protected static Sala[][] masmorra;

@@ -1,7 +1,8 @@
 public class Main {
 
-	
-
+//Crear personatge
+//Iniciar la mazmorra
+//Pedir opciones al 
 //	El personaje comenzara en la sala de arriba a la izquierda de la mazmorra en cada turno se le dara 3 opciones al jugador.
 		//(while con contador de turno, cada turno se le dara las 3 opciones, hasta que el juego no se acabe el bucle no acabara)
 		

@@ -6,7 +6,7 @@ public class Personatge extends Masmorra implements Combatent{
 	protected String nom;
 	protected int vida; //entre 5-20
 	protected int atac; //entre 1-4
-	protected int experiencia; // pensar si double o int y empieza en 0
+	protected int experiencia; //empieza en 0
 	protected int agilitat; //entre 4-11
 	protected int forsa; //entre 4-11
 	protected int[] posicio; //un array valor de fila y columna en que se encuentra el personaje 
@@ -14,24 +14,45 @@ public class Personatge extends Masmorra implements Combatent{
 
 
 	//Constructor
-	public Personatge (String nom, int vida, int atac, int experiencia, int agilitat, int forsa) {
+		
+	public Personatge (String nom) {
 		this.nom = nom;
-		this.vida = vida;
-		this.atac = atac;
-		this.experiencia = experiencia;
-		this.agilitat = agilitat;
-		this.forsa = forsa;
+		this.vida = generarVida();
+		this.atac = generarAtac();
+		this.experiencia = 0;
+		this.agilitat = generarAgilitat();
+		this.forsa = generarForsa();
 		this.posicio = new int[] {0,0}; // El personatge comença a la sala superior esquerra
 		this.equipament = new Tresor[this.forsa];
 	}
 
 
 
-	//Metodos
+	//METODOS PARA GENERAR LOS ATRIBUTOS DE FORMA ALEATORIA
 
+	// Num aleatorio para vida
+	public static int generarVida() {
+		return (int) (Math.random() * (20 - 5 + 1) + 5);
+	}
 
-	//calcluarAtac() heredado de la interficie
-	//devuelve un numero aleatorio entre 1 i el valor del atac del personaje
+	// Num aleatorio para atac
+	public static int generarAtac() {
+		return (int) (Math.random() * (4 - 1 + 1) + 1);
+	}
+
+	// Num aleatorio para agilitat
+	public static int generarAgilitat() {
+		return (int) (Math.random() * (11 - 4 + 1) + 4);
+	}
+
+	// Num aleatorio para forsa
+	public static int generarForsa() {
+		return (int) (Math.random() * (11 - 4 + 1) + 4);
+	}
+
+	// METODOS DE LA INTERFICIE COMBATENT
+		//calcluarAtac() heredado de la interficie
+		//devuelve un numero aleatorio entre 1 i el valor del atac del personaje
 	public int calcularAtac() {
 		return (int) (Math.random() * (this.atac - 1 + 1) + 1);
 	}
@@ -44,8 +65,8 @@ public class Personatge extends Masmorra implements Combatent{
     public boolean estaViu() {
         return this.vida > 0;
     }
-
-	//atacar(Monstre m) de tipo monstruo
+	// METODOS
+		//atacar(Monstre m) de tipo monstruo
 
 		//	El personatge calcula el dany del seu atac
 	public void atacar(Monstre m) {
@@ -144,7 +165,6 @@ public class Personatge extends Masmorra implements Combatent{
 			case 'O':
 				this.posicio[1]--;
 				break;
-			
 		}	
 
 		if (getSalaActual().monstre != null && getSalaActual().monstre.estaViu()) {
@@ -168,8 +188,6 @@ public class Personatge extends Masmorra implements Combatent{
 		teclado.close();
 	}
 	
-
-
 
 	//ToString
 	

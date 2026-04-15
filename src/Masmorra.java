@@ -10,14 +10,20 @@ public class Masmorra {
     protected static String causaMort = null; // "monstre" o "pont"
 
     // __ Inicialitzacio __
-
-    public static void inicialitzar(int M, int N, Tresor[] tresors, Monstre[] monstres, Personatge p) {
-        files = M;
-        columnes = N;
+    /**
+     * @param M nombre de files
+     * @param N nombre de columnes
+     * @param tresors array de tresors
+     * @param monstres array de monstres
+     * @param p Personatge que jugarà la masmorra
+     */
+    public static void inicialitzar(int f, int c, Tresor[] tresors, Monstre[] monstres, Personatge p) {
+        files = f;
+        columnes = c;
         Masmorra.tresors = tresors;
         Masmorra.monstres = monstres;
         Masmorra.personatge = p;
-        masmorra = new Sala[M][N];
+        masmorra = new Sala[f][c];
         causaMort = null;
 
         // El personatge comença sempre a la sala superior esquerra
@@ -204,15 +210,15 @@ public class Masmorra {
         return masmorra[fila][col];
     }
 
-    /**
-     * Comprova si la direcció donada porta a dins la masmorra o a un extrem (sortida).
-     */
-    public static boolean direccioPermesa(char direccio) {
-        // Totes les direccions estan permeses; sortir per un extrem és victòria.
-        // Però evitem moure'ns en una direcció que no sigui N/S/E/O.
-        char d = Character.toUpperCase(direccio);
-        return d == 'N' || d == 'S' || d == 'E' || d == 'O';
-    }
+    // /**
+    //  * Comprova si la direcció donada porta a dins la masmorra o a un extrem (sortida).
+    //  */
+    // public static boolean direccioPermesa(char direccio) {
+    //     // Totes les direccions estan permeses; sortir per un extrem és victòria.
+    //     // Però evitem moure'ns en una direcció que no sigui N/S/E/O.
+    //     char d = Character.toUpperCase(direccio);
+    //     return d == 'N' || d == 'S' || d == 'E' || d == 'O';
+    // }
 
     protected static int percentatgeExplorat() {
         int explorades = 0;

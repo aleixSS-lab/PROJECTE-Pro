@@ -103,7 +103,7 @@ public class Masmorra {
     public static void explorar() {
         personatge.explorar(getSalaActual());
     }
-
+    
     public static void moure(char direccio) {
         Sala salaActual = getSalaActual();
 
@@ -191,7 +191,7 @@ public class Masmorra {
             System.out.println("Percentatge explorat: " + percentatgeExplorat() + "%");
         }
 
-        System.out.println("==============================\n");
+        System.out.println("==============================");
     }
 
     // __ Metodes auxiliars __

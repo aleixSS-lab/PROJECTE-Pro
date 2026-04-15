@@ -110,7 +110,7 @@ public class Personatge extends Masmorra implements Combatent{
 	}
 
 	//moure(char direccio) el personaje se mueve en una direccion ('N','S','E' o 'O')
-
+		// Hacer un bucle para pedir que el usuario ingrese una dirección válida hasta que lo haga correctamente
 	public void moure(char direccio) {
 		switch (direccio) {
 			case 'N':

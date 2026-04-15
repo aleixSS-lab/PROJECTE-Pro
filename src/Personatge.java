@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Personatge extends Masmorra implements Combatent{
 	//	Atributs
@@ -98,7 +99,7 @@ public class Personatge extends Masmorra implements Combatent{
 				}else {
 					System.out.println("L'equipament està ple!");
 				}
-			break;
+		
 		}
 	} else {
 			System.out.println("La sala no té cap tresor.");
@@ -109,9 +110,27 @@ public class Personatge extends Masmorra implements Combatent{
 		}
 	}
 
-	//moure(char direccio) el personaje se mueve en una direccion ('N','S','E' o 'O')
-		// Hacer un bucle para pedir que el usuario ingrese una dirección válida hasta que lo haga correctamente
+	// moure(char direccio) el personaje se mueve en una direccion ('N','S','E' o 'O')
+		
 	public void moure(char direccio) {
+		Scanner teclado = new Scanner(System.in);
+
+		System.out.print("Introdueix una direcció (N, S, E, O): ");
+			direccio = teclado.next().charAt(0);
+		//  Hacer un bucle para pedir que el usuario ingrese una dirección válida hasta que lo haga correctamente -->
+		while(direccio!= 'N' && direccio != 'S' &&direccio != 'E' && direccio != 'O') {
+			System.out.println("Direcció no vàlida. Utilitza N, S, E o O.");
+			System.out.print("Introdueix una direcció (N, S, E, O): ");
+			direccio = teclado.next().charAt(0);
+		}
+		
+
+		Sala salaActual = getSalaActual();
+
+		// S'executa el metode de intentarSoritr() de la sala actual.
+		salaActual.intentarSortir(Personatge.this);
+			if(salaActual.intentarSortir(Personatge.this) == true) {
+				// FER ELS MOVIMENTS CORRESPONENTS A CADA DIRECCIÓ
 		switch (direccio) {
 			case 'N':
 				this.posicio[0]--;
@@ -125,9 +144,28 @@ public class Personatge extends Masmorra implements Combatent{
 			case 'O':
 				this.posicio[1]--;
 				break;
-			default:
-				System.out.println("Direcció no vàlida. Utilitza N, S, E o O.");
+			
 		}	
+
+		if (getSalaActual().monstre != null && getSalaActual().monstre.estaViu()) {
+			System.out.println("Hi havia un monstre viu a la sala! Tens penalització per fugida! Perds " + getSalaActual().monstre.penalitzacio + " de dany.");
+			this.vida -= getSalaActual().monstre.penalitzacio;
+			if (this.vida <= 0) {
+				haFinalitzat();
+				causaMort = "Penalització de fugida, perdida total de vida.";
+				System.out.println("Has mort a causa de la penalització de fugida! Causa de mort: " + causaMort);
+			}
+			System.out.println("Vida restant: " + this.vida);
+			this.rebreDany(getSalaActual().monstre.penalitzacio);
+		}
+
+		}
+		else{
+		System.out.println("No pots sortir d'aquesta sala! Intenta una altra direcció o explora la sala.");
+		}
+			
+
+		teclado.close();
 	}
 	
 

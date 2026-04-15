@@ -104,41 +104,41 @@ public class Masmorra {
         personatge.explorar(getSalaActual());
     }
     
-    public static void moure(char direccio) {
-        Sala salaActual = getSalaActual();
+    // public static void moure(char direccio) {
+    //     Sala salaActual = getSalaActual();
 
-        // Comprovar si pot sortir de la sala
-        if (!salaActual.intentarSortir(personatge)) {
-            // La sala pot haver causat dany (SalaPont)
-            if (!personatge.estaViu()) {
-                causaMort = "pont";
-            }
-            return;
-        }
+    //     // Comprovar si pot sortir de la sala
+    //     if (!salaActual.intentarSortir(personatge)) {
+    //         // La sala pot haver causat dany (SalaPont)
+    //         if (!personatge.estaViu()) {
+    //             causaMort = "pont";
+    //         }
+    //         return;
+    //     }
 
-        // Penalització de fugida si hi ha monstre viu
-        if (salaActual.monstre != null && salaActual.monstre.estaViu()) {
-            int pen = salaActual.monstre.penalitzacio;
-            if (pen > 0) {
-                personatge.rebreDany(pen);
-                System.out.println("  ⚠ El monstre t'ataca mentre fuges! Perds " + pen + " de vida. Vida restant: " + personatge.vida);
-                if (!personatge.estaViu()) {
-                    causaMort = "monstre";
-                    return;
-                }
-            }
-        }
+    //     // Penalització de fugida si hi ha monstre viu
+    //     if (salaActual.monstre != null && salaActual.monstre.estaViu()) {
+    //         int pen = salaActual.monstre.penalitzacio;
+    //         if (pen > 0) {
+    //             personatge.rebreDany(pen);
+    //             System.out.println("  ⚠ El monstre t'ataca mentre fuges! Perds " + pen + " de vida. Vida restant: " + personatge.vida);
+    //             if (!personatge.estaViu()) {
+    //                 causaMort = "monstre";
+    //                 return;
+    //             }
+    //         }
+    //     }
 
-        // Moure el personatge (actualitza posicio[])
-        personatge.moure(direccio);
+    //     // Moure el personatge (actualitza posicio[])
+    //     personatge.moure(direccio);
 
-        // Comprovar si ha sortit per un extrem (victòria)
-        if (haSortit()) {
-            return; // haFinalitzat() ho detectarà
-        }
+    //     // Comprovar si ha sortit per un extrem (victòria)
+    //     if (haSortit()) {
+    //         return; // haFinalitzat() ho detectarà
+    //     }
 
-        System.out.println("  T'has mogut a la posició [" + personatge.posicio[0] + ", " + personatge.posicio[1] + "].");
-    }
+    //     System.out.println("  T'has mogut a la posició [" + personatge.posicio[0] + ", " + personatge.posicio[1] + "].");
+    // }
 
     public static void atacar() {
         Sala sala = getSalaActual();
@@ -166,7 +166,7 @@ public class Masmorra {
         return false;
     }
 
-    private static boolean haSortit() {
+    protected static boolean haSortit() {
         int fila = personatge.posicio[0];
         int col  = personatge.posicio[1];
         return fila < 0 || fila >= files || col < 0 || col >= columnes;
@@ -235,4 +235,17 @@ public class Masmorra {
             if (t != null) total += t.valor;
         return total;
     }
+
+
+
+
+
+    // GETTERS
+    public static Sala[][] getMasmorra() {
+        return masmorra;
+    }
+    public static boolean gethaSortit() {
+        return haSortit();
+    }
+
 }

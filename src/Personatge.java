@@ -15,8 +15,8 @@ public class Personatge extends Masmorra implements Combatent{
 
 	//Constructor
 		
-	public Personatge (String nom) {
-		this.nom = nom;
+	public Personatge (String nomConsola) {
+		this.nom = nomConsola;
 		this.vida = generarVida();
 		this.atac = generarAtac();
 		this.experiencia = 0;

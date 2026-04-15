@@ -11,9 +11,9 @@ public class Monstre implements Combatent {
 	
 //	Constructores
 	/**
-	 * @param nom 
-	 * @param vida
-	 * @param penalitzacio
+	 * @param nom  
+	 * @param vida	Vida del monstre
+	 * @param penalitzacio de fugida (Vida que le resta al personatge quan surti de la sala)
 	 */
 	
 	Monstre(String nom, int vida, int penalitzacio){

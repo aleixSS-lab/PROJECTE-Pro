@@ -1,15 +1,15 @@
-public  class Masmorra {
+public class Masmorra {
 
     // __ Atributs estàtics __
-    protected static Sala[][] masmorra;
-    protected static Tresor[] tresors;
-    protected static Monstre[] monstres;
-    protected static Personatge personatge;
-    protected static int files;
-    protected static int columnes;
-    protected static String causaMort = null; // "monstre" o "pont"
+    protected Sala[][] masmorra;
+    protected Tresor[] tresors;
+    protected Monstre[] monstres;
+    protected Personatge personatge;
+    protected int files;
+    protected int columnes;
+    protected String causaMort = null; // "monstre" o "pont"
 
-    // Constructor --> Modificarlo bien bien.
+    // Constructor 
     /**
      * @param M nombre de files
      * @param N nombre de columnes
@@ -17,14 +17,14 @@ public  class Masmorra {
      * @param monstres array de monstres
      * @param p Personatge que jugarà la masmorra
      */
-    public static void inicialitzar(int fil, int col, Tresor[] tresors, Monstre[] monstres, Personatge p) {
-        files = fil;
-        columnes = col;
-        Masmorra.tresors = tresors;
-        Masmorra.monstres = monstres;
-        Masmorra.personatge = p;
-        masmorra = new Sala[fil][col];
-        causaMort = null;
+    public void inicialitzar(int fil, int col, Tresor[] tresors, Monstre[] monstres, Personatge p) {
+        this.files = fil;
+        this.columnes = col;
+        this.tresors = tresors;
+        this.monstres = monstres;
+        this.personatge = p;
+        this.masmorra = new Sala[fil][col];
+        this.causaMort = null;
 
         // El personatge comença sempre a la sala superior esquerra
         personatge.posicio[0] = 0;
@@ -35,7 +35,7 @@ public  class Masmorra {
 
     // __ Generació de la Masmorra __
 
-    protected static void generarMasmorra() {
+    protected void generarMasmorra() {
         for (int i = 0; i < files; i++) {
             for (int j = 0; j < columnes; j++) {
                 Tresor t = tresorAleatori();
@@ -54,14 +54,14 @@ public  class Masmorra {
         }
     }
 
-    protected static Tresor tresorAleatori() {
+    protected Tresor tresorAleatori() {
         if (Math.random() < 0.5 && tresors.length > 0) {
             return tresors[(int) (Math.random() * tresors.length)];
         }
         return null;
     }
 
-    protected static Monstre monstreAleatori() {
+    protected Monstre monstreAleatori() {
         if (Math.random() < 0.5 && monstres.length > 0) {
             return monstres[(int) (Math.random() * monstres.length)];
         }
@@ -70,7 +70,7 @@ public  class Masmorra {
 
     // __ Impressió de la Masmorra __
 
-    public static void mostrarMasmorra() {
+    public void mostrarMasmorra() {
         System.out.println("\n=== MASMORRA (" + files + "x" + columnes + ") ===");
         for (int i = 0; i < files; i++) {
             for (int j = 0; j < columnes; j++) {
@@ -90,7 +90,7 @@ public  class Masmorra {
 
     // __ Mostrar Opcions __
 
-    public static void mostrarOpcions() {
+    public void mostrarOpcions() {
         Sala sala = getSalaActual();
         System.out.println("\nQuè vols fer?");
 
@@ -106,47 +106,15 @@ public  class Masmorra {
 
     // __ Accions principals __
 
-    public static void explorar() {
+    public void explorar() {
         personatge.explorar(getSalaActual());
     }
-    
-    // public static void moure(char direccio) {
-    //     Sala salaActual = getSalaActual();
+   
+    public void moure() {
+    	personatge.moure();
+    }
 
-    //     // Comprovar si pot sortir de la sala
-    //     if (!salaActual.intentarSortir(personatge)) {
-    //         // La sala pot haver causat dany (SalaPont)
-    //         if (!personatge.estaViu()) {
-    //             causaMort = "pont";
-    //         }
-    //         return;
-    //     }
-
-    //     // Penalització de fugida si hi ha monstre viu
-    //     if (salaActual.monstre != null && salaActual.monstre.estaViu()) {
-    //         int pen = salaActual.monstre.penalitzacio;
-    //         if (pen > 0) {
-    //             personatge.rebreDany(pen);
-    //             System.out.println("  ⚠ El monstre t'ataca mentre fuges! Perds " + pen + " de vida. Vida restant: " + personatge.vida);
-    //             if (!personatge.estaViu()) {
-    //                 causaMort = "monstre";
-    //                 return;
-    //             }
-    //         }
-    //     }
-
-    //     // Moure el personatge (actualitza posicio[])
-    //     personatge.moure(direccio);
-
-    //     // Comprovar si ha sortit per un extrem (victòria)
-    //     if (haSortit()) {
-    //         return; // haFinalitzat() ho detectarà
-    //     }
-
-    //     System.out.println("  T'has mogut a la posició [" + personatge.posicio[0] + ", " + personatge.posicio[1] + "].");
-    // }
-
-    public static void atacar() {
+    public void atacar() {
         Sala sala = getSalaActual();
         if (sala.monstre == null || !sala.monstre.estaViu()) {
             System.out.println("No hi ha cap monstre viu a la sala.");
@@ -166,30 +134,31 @@ public  class Masmorra {
      * - El personatge mor (vida <= 0)
      * - El personatge surt per un extrem de la masmorra
      */
-    public static boolean haFinalitzat() {
+    public boolean haFinalitzat() {
         if (!personatge.estaViu()) return true;
         if (haSortit()) return true;
         return false;
     }
 
-    protected static boolean haSortit() {
+    protected boolean haSortit() {
         int fila = personatge.posicio[0];
         int col  = personatge.posicio[1];
         return fila < 0 || fila >= files || col < 0 || col >= columnes;
     }
 
-    public static void mostrarResultats() {
+//    Ampliació
+    public void mostrarResultats() {
         System.out.println("\n==============================");
 
         if (!personatge.estaViu()) {
             // DERROTA
-            System.out.println("💀 Has mort a la masmorra...");
+            System.out.println("Has mort a la masmorra...");
             System.out.println("Causa de la mort: " + (causaMort != null ? causaMort : "desconeguda"));
             System.out.println("Experiència aconseguida: " + personatge.experiencia);
             System.out.println("Percentatge explorat: " + percentatgeExplorat() + "%");
         } else {
             // VICTÒRIA
-            System.out.println("🏆 Has sortit de la masmorra! Enhorabona!");
+            System.out.println("Has sortit de la masmorra! Enhorabona!");
             System.out.println("Experiència: " + personatge.experiencia);
             System.out.println("Nombre de tresors: " + numTresors());
             System.out.println("Total monedes d'or: " + totalMonedes());
@@ -202,7 +171,7 @@ public  class Masmorra {
 
     // __ Metodes auxiliars __
 
-    public static Sala getSalaActual() {
+    public Sala getSalaActual() {
         int fila = personatge.posicio[0];
         int col  = personatge.posicio[1];
         // Guardem el rang per si de cas
@@ -213,14 +182,14 @@ public  class Masmorra {
     // /**
     //  * Comprova si la direcció donada porta a dins la masmorra o a un extrem (sortida).
     //  */
-    // public static boolean direccioPermesa(char direccio) {
+    // public boolean direccioPermesa(char direccio) {
     //     // Totes les direccions estan permeses; sortir per un extrem és victòria.
     //     // Però evitem moure'ns en una direcció que no sigui N/S/E/O.
     //     char d = Character.toUpperCase(direccio);
     //     return d == 'N' || d == 'S' || d == 'E' || d == 'O';
     // }
 
-    protected static int percentatgeExplorat() {
+    protected int percentatgeExplorat() {
         int explorades = 0;
         for (int i = 0; i < files; i++)
             for (int j = 0; j < columnes; j++)
@@ -228,14 +197,14 @@ public  class Masmorra {
         return (explorades * 100) / (files * columnes);
     }
 
-    protected static int numTresors() {
+    protected int numTresors() {
         int count = 0;
         for (Tresor t : personatge.equipament)
             if (t != null) count++;
         return count;
     }
 
-    protected static int totalMonedes() {
+    protected int totalMonedes() {
         int total = 0;
         for (Tresor t : personatge.equipament)
             if (t != null) total += t.valor;

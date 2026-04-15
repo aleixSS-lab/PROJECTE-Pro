@@ -1,17 +1,45 @@
+import java.util.Scanner;
+
 public class Main {
 	 public static void main(String[] args) {
+		 System.out.println(" /$$$$$$$                                                                  /$$$$$$                                  /$$    ");
+	        System.out.println("| $$__  $$                                                             /$$__  $$                                | $$    ");
+	        System.out.println("| $$  \\ $$  /$$$$$$  /$$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$$ | $$  \\ $$ /$$   /$$  /$$$$$$   /$$$$$$$ /$$$$$$  ");
+	        System.out.println("| $$  | $$ |____  $$| $$__  $$ /$$__  $$ /$$__  $$ /$$__  $$| $$__  $$| $$  | $$| $$  | $$ /$$__  $$ /$$_____/|_  $$_/  ");
+	        System.out.println("| $$  | $$  /$$$$$$$| $$  \\ $$| $$  \\ $$| $$$$$$$$| $$  \\ $$| $$  \\ $$| $$  | $$| $$  | $$| $$$$$$$$|  $$$$$$   | $$    ");
+	        System.out.println("| $$  | $$ /$$__  $$| $$  | $$| $$  | $$| $$_____/| $$  | $$| $$  | $$| $$/$$ $$| $$  | $$| $$_____/ \\____  $$  | $$ /$$");
+	        System.out.println("| $$$$$$$/|  $$$$$$$| $$  | $$|  $$$$$$$|  $$$$$$$|  $$$$$$/| $$  | $$|  $$$$$$/|  $$$$$$/|  $$$$$$$ /$$$$$$$/  |  $$$$/");
+	        System.out.println("|_______/  \\_______/|__/  |__/ \\____  $$ \\_______/ \\______/ |__/  |__/ \\____ $$$ \\______/  \\_______/|_______/    \\___/  ");
+	        System.out.println("                               /$$  \\ $$                                    \\__/                                        ");
+	        System.out.println("                              |  $$$$$$/                                                                                ");
+	        System.out.println("                               \\______/                                                                                 ");
+	     
+//	   SALTO DE LINIA     
+	 System.out.println();
+	 System.out.println();
+	 System.out.println();
+	 
+	 Scanner teclado = new Scanner(System.in);
+	 
 	//Crear personatge
-	Personatge Pepe = new Personatge("Pepe");
-	System.out.println("Bienvenido a la mazmorra, " + Pepe.nom + "!");
+	System.out.println("Hola, com et voldrias cridar?");
+	System.out.print("Introdueix el teu nom: ");
+	String nomConsola = teclado.next();
+	Personatge per1 = new Personatge(nomConsola);
+	System.out.println("Bienvenido a la mazmorra, " + per1.nom + "!");
 
 	// Crear tresors
 	Tresor cartaMagica = new Tresor("Carta Magica", 10, 1.2);
+	Tresor vara = new Tresor("Vara", 25, 2.6);
 
 	//Crear monstres
+	Monstre goblin = new Monstre("Goblin", 100, 1);
+	Monstre drac = new Monstre("Drac", 100, 2);
+	
 	//Iniciar la mazmorra
-	Masmorra.inicialitzar(10, 10, null, null, Pepe);
+	
 	//Pedir opciones al personatge y mostrar mazmorra
-	Masmorra.mostrarOpcions();
+
 	
 
 

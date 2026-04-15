@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Main {
 	 public static void main(String[] args) {
-		 System.out.println(" /$$$$$$$                                                                  /$$$$$$                                  /$$    ");
+		 System.out.println("\u001B[35m/$$$$$$$                                                               /$$$$$$                                  /$$    ");
 	        System.out.println("| $$__  $$                                                             /$$__  $$                                | $$    ");
 	        System.out.println("| $$  \\ $$  /$$$$$$  /$$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$$ | $$  \\ $$ /$$   /$$  /$$$$$$   /$$$$$$$ /$$$$$$  ");
 	        System.out.println("| $$  | $$ |____  $$| $$__  $$ /$$__  $$ /$$__  $$ /$$__  $$| $$__  $$| $$  | $$| $$  | $$ /$$__  $$ /$$_____/|_  $$_/  ");
@@ -15,7 +15,7 @@ public class Main {
 	        System.out.println("                               \\______/                                                                                 ");
 	     
 //	   SALTO DE LINIA     
-	 System.out.println();
+	 System.out.println("\u001B[0m");
 	 System.out.println();
 	 System.out.println();
 	 
@@ -37,7 +37,7 @@ public class Main {
 	Monstre drac = new Monstre("Drac", 100, 2);
 	
 	//Iniciar la mazmorra
-	
+	Masmorra.inicialitzar(10, 10, null, null, per1);
 	//Pedir opciones al personatge y mostrar mazmorra
 
 	

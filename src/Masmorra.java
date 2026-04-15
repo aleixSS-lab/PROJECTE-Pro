@@ -240,12 +240,5 @@ public class Masmorra {
 
 
 
-    // GETTERS
-    public static Sala[][] getMasmorra() {
-        return masmorra;
-    }
-    public static boolean gethaSortit() {
-        return haSortit();
-    }
-
+    
 }

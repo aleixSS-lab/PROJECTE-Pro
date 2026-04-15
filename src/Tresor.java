@@ -7,7 +7,12 @@ public class Tresor {
 	protected double pes;
 	
 //	Constructor
-	
+	/**
+	 * Constructor de la clase Tresor
+	 * @param nom Nombre del tresor.
+	 * @param valor Valor del tesoro en monedas de oro.
+	 * @param pes Pes del tresor en double.
+	 */
 	Tresor(String nom, int valor, double pes){
 		this.nom = nom;
 		this.valor = valor;

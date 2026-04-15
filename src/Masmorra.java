@@ -9,7 +9,7 @@ public  class Masmorra {
     protected static int columnes;
     protected static String causaMort = null; // "monstre" o "pont"
 
-    // __ Inicialitzacio __
+    // Constructor --> Modificarlo bien bien.
     /**
      * @param M nombre de files
      * @param N nombre de columnes
@@ -17,13 +17,13 @@ public  class Masmorra {
      * @param monstres array de monstres
      * @param p Personatge que jugarà la masmorra
      */
-    public static void inicialitzar(int f, int c, Tresor[] tresors, Monstre[] monstres, Personatge p) {
-        files = f;
-        columnes = c;
+    public static void inicialitzar(int fil, int col, Tresor[] tresors, Monstre[] monstres, Personatge p) {
+        files = fil;
+        columnes = col;
         Masmorra.tresors = tresors;
         Masmorra.monstres = monstres;
         Masmorra.personatge = p;
-        masmorra = new Sala[f][c];
+        masmorra = new Sala[fil][col];
         causaMort = null;
 
         // El personatge comença sempre a la sala superior esquerra

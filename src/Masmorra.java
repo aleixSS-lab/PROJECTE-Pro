@@ -32,8 +32,7 @@ public  class Masmorra {
         causaMort = null;
 
         // El personatge comença sempre a la sala superior esquerra
-        personatge.posicio[0] = 0;
-        personatge.posicio[1] = 0;
+       
 
         generarMasmorra();
     }
@@ -103,29 +102,76 @@ public  class Masmorra {
         System.out.println("Què vols fer?");
         
         if (!sala.explorada) {
-            System.out.println(" Explorar la sala");
+            System.out.println("Explorar la sala.");
         }  
-        System.out.println("Moure");
+        System.out.println("Moure.");
         if (sala.monstre != null && sala.monstre.estaViu()) {
-            System.out.println("Atacar a " + sala.monstre.nom + " (vida: " + sala.monstre.vida + ")");
+            System.out.println("Atacar a " + sala.monstre.nom + " (vida: " + sala.monstre.vida + "). (Atacar)");
+        }else {
+        	System.out.println("No hi ha monstres");
         }
         
+        System.out.println();
+        System.out.print("Escull: ");
         
 //      MIRAR QUE A ESCOJIDO
         String escollirOpcio = teclado.next();
+        System.out.println();
         
-        if(escollirOpcio.equalsIgnoreCase("Explorar la sala")) {
-        	Masmorra.explorar();
-        }
-        else if(escollirOpcio.equalsIgnoreCase("Moure")) {
-        	System.out.print("Introdueix una direcció (N, S, E, O): ");
-        	char escollirDireccio = teclado.next().charAt(0);
-        	Masmorra.personatge.moure(escollirDireccio);
+//        HACER UN BUCLE || Si se pone bien verificar que a puesto || Si lo pone mal pedirle otra vez que escoja dandole las opciones otra vez
+        
+        int contadorErrores = 0;
+        
+        while(!escollirOpcio.equalsIgnoreCase("Explorar la sala") && !escollirOpcio.equalsIgnoreCase("Explorar")
+        		&& !escollirOpcio.equalsIgnoreCase("Moure") && !escollirOpcio.equalsIgnoreCase("Atacar")) {
+        	
+        	contadorErrores++;
+        	
+        	System.out.println("La teva opció no es una valida, torna a escollir.");
+        	System.out.println();
+        	
+        	 System.out.println("Què vols fer?");
+             
+             if (!sala.explorada) {
+                 System.out.println("Explorar la sala.");
+             }  
+             System.out.println("Moure.");
+             if (sala.monstre != null && sala.monstre.estaViu()) {
+                 System.out.println("Atacar a " + sala.monstre.nom + " (vida: " + sala.monstre.vida + "). (Atacar)");
+             }else {
+             	System.out.println("No hi ha monstres");
+             }
+             
+             System.out.println();
+             System.out.print("Escull: ");
+             escollirOpcio = teclado.next();
+             System.out.println();
         }
         
-        System.out.println("Mostrar personatge");
+        
+        
+        	if(escollirOpcio.equalsIgnoreCase("Explorar la sala")) {
+        		Masmorra.explorar();
+        	}
+        	else if(escollirOpcio.equalsIgnoreCase("Moure")) {
+        		System.out.print("Introdueix una direcció (N, S, E, O): ");
+        		char escollirDireccio = teclado.next().charAt(0);
+        		Masmorra.personatge.moure(escollirDireccio);
+        	}
+        	else {
+        		if(escollirOpcio.equalsIgnoreCase("Atacar")) {
+        			personatge.atacar(sala.monstre);
+        		}
+        	}
+       
+        	
+        
+        
+       
         teclado.close();
     }
+    
+    
 
     // Accions principals 
 
@@ -199,9 +245,9 @@ public  class Masmorra {
         int col  = personatge.posicio[1];
         // Guardem el rang per si de cas
         if (fila < 0 || fila >= files || col < 0 || col >= columnes) {
-        	return masmorra[fila][col];
+            return null;  // está fuera → ha salido de la masmorra
         }
-        return null;
+        return masmorra[fila][col];
     }
 
     // /**

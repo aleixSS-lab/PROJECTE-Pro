@@ -93,23 +93,41 @@ public  class Masmorra {
         System.out.println("============================");
     }
 
-    // __ Mostrar Opcions __
+    //  Mostrar Opcions 
 
     public static void mostrarOpcions() {
+    	Scanner teclado = new Scanner(System.in);
+    	
         Sala sala = Masmorra.getSalaActual();
+        
         System.out.println("Què vols fer?");
-
+        
         if (!sala.explorada) {
             System.out.println(" Explorar la sala");
-        }
-        System.out.println("Moure (N/S/E/O)");
+        }  
+        System.out.println("Moure");
         if (sala.monstre != null && sala.monstre.estaViu()) {
             System.out.println("Atacar a " + sala.monstre.nom + " (vida: " + sala.monstre.vida + ")");
         }
+        
+        
+//      MIRAR QUE A ESCOJIDO
+        String escollirOpcio = teclado.next();
+        
+        if(escollirOpcio.equalsIgnoreCase("Explorar la sala")) {
+        	Masmorra.explorar();
+        }
+        else if(escollirOpcio.equalsIgnoreCase("Moure")) {
+        	System.out.print("Introdueix una direcció (N, S, E, O): ");
+        	char escollirDireccio = teclado.next().charAt(0);
+        	Masmorra.personatge.moure(escollirDireccio);
+        }
+        
         System.out.println("Mostrar personatge");
+        teclado.close();
     }
 
-    // __ Accions principals __
+    // Accions principals 
 
     public static void explorar() {
         personatge.explorar(getSalaActual());
@@ -132,7 +150,7 @@ public  class Masmorra {
         }
     }
 
-    // __ Fi del Joc __
+    // Fi del Joc
 
     /**
      * El joc acaba si:
@@ -174,7 +192,7 @@ public  class Masmorra {
         System.out.println("==============================");
     }
 
-    // __ Metodes auxiliars __
+    //  Metodes auxiliars 
 
     public static Sala getSalaActual() {
         int fila = personatge.posicio[0];

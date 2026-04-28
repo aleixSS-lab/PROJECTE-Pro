@@ -141,8 +141,7 @@ public class Personatge extends Masmorra implements Combatent{
 		//  Hacer un bucle para pedir que el usuario ingrese una dirección válida hasta que lo haga correctamente -->
 		while(direccio!= 'N' && direccio != 'S' &&direccio != 'E' && direccio != 'O') {
 			System.out.println("Direcció no vàlida. Utilitza N, S, E o O.");
-			System.out.print("Introdueix una direcció (N, S, E, O): ");
-			direccio = teclado.next().charAt(0);
+			
 		}
 		
 
@@ -185,7 +184,6 @@ public class Personatge extends Masmorra implements Combatent{
 		}
 			
 
-		teclado.close();
 	}
 	
 

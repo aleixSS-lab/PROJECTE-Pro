@@ -26,31 +26,7 @@ public abstract class Sala {
 		return (int) (Math.random() * (12 - 1 + 1) + 1);
 	}
 
-	// Métodos de getter i setter de nom, valor y pes. || Se necesitan de verdad? y para que? || Se pueden eliminar?
-	public void setTresor(Tresor t) {
-		
-		 this.tresor = t;
-	}
-
-	public void setMonstre(Monstre m){
-		this.monstre = m;
-	}
-
-	public void setExplorada(boolean e) {
-		this.explorada = e;
-	}	
-
-	public Tresor getTresor() {
-		return this.tresor;
-	}
-
-	public Monstre getMonstre() {
-		return this.monstre;
-	}
-
-	public boolean getExplorada() {
-		return this.explorada;
-	}
+	
 	
 
 }

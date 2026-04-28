@@ -25,8 +25,8 @@ public  class Masmorra {
     public static void inicialitzar(int fil, int col, Tresor[] tresors, Monstre[] monstres, Personatge p) {
         files = fil;
         columnes = col;
-        tresors = tresors;
-        monstres = monstres;
+        Masmorra.tresors = tresors;
+        Masmorra.monstres = monstres;
         personatge = p;
         masmorra = new Sala[fil][col];
         causaMort = null;
@@ -96,7 +96,7 @@ public  class Masmorra {
     // __ Mostrar Opcions __
 
     public static void mostrarOpcions() {
-        Sala sala = getSalaActual();
+        Sala sala = Masmorra.getSalaActual();
         System.out.println("Què vols fer?");
 
         if (!sala.explorada) {
@@ -244,6 +244,7 @@ public  class Masmorra {
 	System.out.println("Hola, com et voldrias anomenar?");
 	System.out.print("Introdueix el teu nom: ");
 	String nomConsola = teclado.next();
+	
 	Personatge per1 = new Personatge(nomConsola);
 	System.out.println("\u001b[0;38;5;205;49m");
 	System.out.println("BENVOLGUT/DA A LA MASMORRA, " + per1.nom + "!");
@@ -285,18 +286,16 @@ public  class Masmorra {
 	};
 	 
 	
-
-	
 	//Iniciar la mazmorra
-	Masmorra.inicialitzar(10, 10, tresors, monstres, per1);
+	inicialitzar(10, 10, tresors, monstres, per1);
 	
 	//Pedir opciones al personatge y mostrar mazmorra
 
-	while(!Masmorra.haFinalitzat()) {
-		Masmorra.mostrarOpcions();
-		Masmorra.mostrarMasmorra();
+	while(!haFinalitzat()) {
+		mostrarOpcions();
+		mostrarMasmorra();
 	}
-	Masmorra.haFinalitzat();
+	haFinalitzat();
 	
 	
 

@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public  class Masmorra {
 
     // __ Atributs estàtics __
@@ -74,7 +76,7 @@ public  class Masmorra {
     // __ Impressió de la Masmorra __
 
     public static void mostrarMasmorra() {
-        System.out.println("\n=== MASMORRA (" + files + "x" + columnes + ") ===");
+        System.out.println("MASMORRA (" + files + "x" + columnes + ")");
         for (int i = 0; i < files; i++) {
             for (int j = 0; j < columnes; j++) {
                 if (personatge.posicio[0] == i && personatge.posicio[1] == j) {
@@ -95,16 +97,16 @@ public  class Masmorra {
 
     public static void mostrarOpcions() {
         Sala sala = getSalaActual();
-        System.out.println("\nQuè vols fer?");
+        System.out.println("Què vols fer?");
 
         if (!sala.explorada) {
-            System.out.println("  [E] Explorar la sala");
+            System.out.println(" Explorar la sala");
         }
-        System.out.println("  [M] Moure (N/S/E/O)");
+        System.out.println("Moure (N/S/E/O)");
         if (sala.monstre != null && sala.monstre.estaViu()) {
-            System.out.println("  [A] Atacar a " + sala.monstre.nom + " (vida: " + sala.monstre.vida + ")");
+            System.out.println("Atacar a " + sala.monstre.nom + " (vida: " + sala.monstre.vida + ")");
         }
-        System.out.println("  [P] Mostrar personatge");
+        System.out.println("Mostrar personatge");
     }
 
     // __ Accions principals __
@@ -151,7 +153,7 @@ public  class Masmorra {
 
 //    Ampliació
     public static void mostrarResultats() {
-        System.out.println("\n==============================");
+        System.out.println("==============================");
 
         if (!personatge.estaViu()) {
             // DERROTA
@@ -178,8 +180,10 @@ public  class Masmorra {
         int fila = personatge.posicio[0];
         int col  = personatge.posicio[1];
         // Guardem el rang per si de cas
-        if (fila < 0 || fila >= files || col < 0 || col >= columnes) return null;
-        return masmorra[fila][col];
+        if (fila < 0 || fila >= files || col < 0 || col >= columnes) {
+        	return masmorra[fila][col];
+        }
+        return null;
     }
 
     // /**
@@ -216,7 +220,103 @@ public  class Masmorra {
 
 
 
+    public static void main(String[] args) {
+		 System.out.println("\u001B[35m/$$$$$$$                                                               /$$$$$$                                  /$$    ");
+	        System.out.println("| $$__  $$                                                             /$$__  $$                                | $$    ");
+	        System.out.println("| $$  \\ $$  /$$$$$$  /$$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$$ | $$  \\ $$ /$$   /$$  /$$$$$$   /$$$$$$$ /$$$$$$  ");
+	        System.out.println("| $$  | $$ |____  $$| $$__  $$ /$$__  $$ /$$__  $$ /$$__  $$| $$__  $$| $$  | $$| $$  | $$ /$$__  $$ /$$_____/|_  $$_/  ");
+	        System.out.println("| $$  | $$  /$$$$$$$| $$  \\ $$| $$  \\ $$| $$$$$$$$| $$  \\ $$| $$  \\ $$| $$  | $$| $$  | $$| $$$$$$$$|  $$$$$$   | $$    ");
+	        System.out.println("| $$  | $$ /$$__  $$| $$  | $$| $$  | $$| $$_____/| $$  | $$| $$  | $$| $$/$$ $$| $$  | $$| $$_____/ \\____  $$  | $$ /$$");
+	        System.out.println("| $$$$$$$/|  $$$$$$$| $$  | $$|  $$$$$$$|  $$$$$$$|  $$$$$$/| $$  | $$|  $$$$$$/|  $$$$$$/|  $$$$$$$ /$$$$$$$/  |  $$$$/");
+	        System.out.println("|_______/  \\_______/|__/  |__/ \\____  $$ \\_______/ \\______/ |__/  |__/ \\____ $$$ \\______/  \\_______/|_______/    \\___/  ");
+	        System.out.println("                               /$$  \\ $$                                    \\__/                                        ");
+	        System.out.println("                              |  $$$$$$/                                                                                ");
+	        System.out.println("                               \\______/                                                                                 ");
+	     
+//	   SALTO DE LINIA     
+	 System.out.println("\u001B[0m");
+	 System.out.println();
+	 System.out.println();
+	
+	 Scanner teclado = new Scanner(System.in);
+	 
+	//CREAR PERSONATGE
+	System.out.println("Hola, com et voldrias anomenar?");
+	System.out.print("Introdueix el teu nom: ");
+	String nomConsola = teclado.next();
+	Personatge per1 = new Personatge(nomConsola);
+	System.out.println("\u001b[0;38;5;205;49m");
+	System.out.println("BENVOLGUT/DA A LA MASMORRA, " + per1.nom + "!");
 
+	System.out.println();
+	
+//	MOSTRAR STATS
+	System.out.println("ESTADISTICAS DE " + per1.nom + ":");
+	System.out.println("Vida: " + per1.vida);
+	System.out.println("Agilitat: " + per1.agilitat);
+	System.out.println("Atac: " + per1.atac);
+	System.out.println("Força: " + per1.forsa);
+	System.out.println("Experiencia: " + per1.experiencia);
+	
+	System.out.println("\u001B[0m");
+	
+	// Crear un array para tresors
+	Tresor[] tresors = {
+			new Tresor("Espasa màgica",150,3.5),
+			new Tresor("Elm d'or",200,2.0),
+			new Tresor("Anell de poder",300,0.1),
+			new Tresor("Etecladout antic",100,5.0),
+			new Tresor("Poció d'or",50,0.5),
+			new Tresor("Mapa del tresor", 75,0.2),
+			new Tresor("Carta Magica", 10,1.2),
+			new Tresor("Vara", 25,2.6)
+	};
+
+//	Crear un array para monstres
+	Monstre[] monstres = {
+			new Monstre("Goblin",5,1),
+			new Monstre("Esquelet",7,2),
+			new Monstre("Troll",12,3),
+			new Monstre("Drac petit",10,3),
+			new Monstre("Fantasma",6,0),
+			new Monstre("Llop gegant",8,2),
+			new Monstre("Goblin", 100,1),
+			new Monstre("Drac", 100,2)
+	};
+	 
+	
+
+	
+	//Iniciar la mazmorra
+	Masmorra.inicialitzar(10, 10, tresors, monstres, per1);
+	
+	//Pedir opciones al personatge y mostrar mazmorra
+
+	while(!Masmorra.haFinalitzat()) {
+		Masmorra.mostrarOpcions();
+		Masmorra.mostrarMasmorra();
+	}
+	Masmorra.haFinalitzat();
+	
+	
+
+	
+}
+
+
+	//	El personaje comenzara en la sala de arriba a la izquierda de la mazmorra en cada turno se le dara 3 opciones al jugador.
+			//(while con contador de turno, cada turno se le dara las 3 opciones, hasta que el juego no se acabe el bucle no acabara)
+			
+	// El jugador pedira el metodo explorar en la sala que esta actualmente, onseguira el tesoro (si hay) y se lo pondra en su inventario (si es que tiene hueco)
+			//recorrer array para saber si esta ocupado, si no esta ocupado añadir en ultima posicion el equipamiento  
+			//equipament[] += "nombre Tesoro"
+			//si esta ocupado donar por consola que el equipamiento esta al maximo y no le cabe el tesoro.
+			
+			
+
+		
+    
+    
 
     
 }

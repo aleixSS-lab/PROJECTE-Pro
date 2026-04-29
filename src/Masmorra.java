@@ -75,6 +75,8 @@ public  class Masmorra {
     // __ Impressió de la Masmorra __
 
     public static void mostrarMasmorra() {
+    	System.out.println( );
+    	
         System.out.println("MASMORRA (" + files + "x" + columnes + ")");
         for (int i = 0; i < files; i++) {
             for (int j = 0; j < columnes; j++) {
@@ -98,7 +100,7 @@ public  class Masmorra {
     	Scanner teclado = new Scanner(System.in);
     	
         Sala sala = Masmorra.getSalaActual();
-        
+        System.out.println( );
         System.out.println("Què vols fer?");
         
         if (!sala.explorada) {
@@ -154,9 +156,8 @@ public  class Masmorra {
         		Masmorra.explorar();
         	}
         	else if(escollirOpcio.equalsIgnoreCase("Moure")) {
-        		System.out.print("Introdueix una direcció (N, S, E, O): ");
-        		char escollirDireccio = teclado.next().charAt(0);
-        		Masmorra.personatge.moure(escollirDireccio);
+        		
+        		Masmorra.personatge.moure();
         	}
         	else {
         		if(escollirOpcio.equalsIgnoreCase("Atacar")) {
@@ -179,7 +180,7 @@ public  class Masmorra {
         personatge.explorar(getSalaActual());
     }
    
-    public static void moure() {
+    public void moure() {
     	personatge.moure();
     }
 
@@ -238,7 +239,7 @@ public  class Masmorra {
         System.out.println("==============================");
     }
 
-    //  Metodes auxiliars 
+    //  Metodes obtenirSalaActual 
 
     public static Sala getSalaActual() {
         int fila = personatge.posicio[0];
@@ -282,7 +283,7 @@ public  class Masmorra {
         return total;
     }
 
-
+// MAIN
 
     public static void main(String[] args) {
 		 System.out.println("\u001B[35m/$$$$$$$                                                               /$$$$$$                                  /$$    ");
@@ -297,7 +298,7 @@ public  class Masmorra {
 	        System.out.println("                              |  $$$$$$/                                                                                ");
 	        System.out.println("                               \\______/                                                                                 ");
 	     
-//	   SALTO DE LINIA     
+//	   SALTO DE LINIA  Y CANVIO DE COLOR   
 	 System.out.println("\u001B[0m");
 	 System.out.println();
 	 System.out.println();
@@ -359,7 +360,8 @@ public  class Masmorra {
 		mostrarOpcions();
 		mostrarMasmorra();
 	}
-	haFinalitzat();
+	
+	
 	
 	
 

@@ -133,15 +133,18 @@ public class Personatge extends Masmorra implements Combatent{
 
 	// moure(char direccio) el personaje se mueve en una direccion ('N','S','E' o 'O')
 		
-	public void moure(char direccio) {
+	public void moure() {
 		Scanner teclado = new Scanner(System.in);
 
 		System.out.print("Introdueix una direcció (N, S, E, O): ");
-			direccio = teclado.next().charAt(0);
-		//  Hacer un bucle para pedir que el usuario ingrese una dirección válida hasta que lo haga correctamente -->
-		while(direccio!= 'N' && direccio != 'S' &&direccio != 'E' && direccio != 'O') {
-			System.out.println("Direcció no vàlida. Utilitza N, S, E o O.");
+			char direccio = teclado.next().charAt(0);
+			System.out.println( );
 			
+		//  Hacer un bucle para pedir que el usuario ingrese una dirección válida hasta que lo haga correctamente 
+		while(direccio!= 'N' && direccio != 'S' && direccio != 'E' && direccio != 'O') {
+			System.out.println("Direcció no vàlida. Utilitza N, S, E o O.");
+			direccio = teclado.next().charAt(0);
+			System.out.println( );
 		}
 		
 
@@ -167,23 +170,28 @@ public class Personatge extends Masmorra implements Combatent{
 		}	
 
 		if (getSalaActual().monstre != null && getSalaActual().monstre.estaViu()) {
+			
 			System.out.println("Hi havia un monstre viu a la sala! Tens penalització per fugida! Perds " + getSalaActual().monstre.penalitzacio + " de dany.");
 			this.vida -= getSalaActual().monstre.penalitzacio;
+			
 			if (this.vida <= 0) {
 				haFinalitzat();
 				causaMort = "Penalització de fugida, perdida total de vida.";
 				System.out.println("Has mort a causa de la penalització de fugida! Causa de mort: " + causaMort);
 			}
+			
 			System.out.println("Vida restant: " + this.vida);
 			this.rebreDany(getSalaActual().monstre.penalitzacio);
+			
 		}
 
+//			Si no es pot sortir:
 		}
 		else{
 		System.out.println("No pots sortir d'aquesta sala! Intenta una altra direcció o explora la sala.");
 		}
 			
-
+			teclado.close();
 	}
 	
 

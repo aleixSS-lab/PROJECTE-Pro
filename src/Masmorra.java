@@ -377,20 +377,24 @@ public  class Masmorra {
 	//Pedir opciones al personatge y mostrar mazmorra
 
 	while(!haFinalitzat()) {
-	    mostrarMasmorra();
-	    
-	    if(getSalaActual() == null) break;
-	    
-	    mostrarOpcions(teclado);
-	    
-	
-	    if(!personatge.estaViu()) {
-	        if(causaMort == null) causaMort = "Monstre";
-	        break; 
-	    }
-	    if(haSortit()) {
-	        break;
-	    }
+		
+		if(!personatge.estaViu()) {
+			if(causaMort == null) { causaMort = "Monstre";}
+			break;
+		}
+
+		if(getSalaActual() == null) { break;}
+		mostrarMasmorra();
+		mostrarOpcions(teclado);
+
+
+		if(!personatge.estaViu()) {
+			if(causaMort == null) causaMort = "Monstre";
+			break; 
+		}
+		if(haSortit()) {
+			break;
+		}
 	}
 	
 	mostrarResultats();

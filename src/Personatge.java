@@ -63,7 +63,10 @@ public class Personatge extends Masmorra implements Combatent{
 	}
 
 	public boolean estaViu() {
-		return this.vida >= 0;
+		if(vida == 0) {
+			return false;
+		}
+		return true;
 	}	
 	// METODOS
 	//atacar(Monstre m) de tipo monstruo

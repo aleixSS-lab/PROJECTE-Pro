@@ -15,7 +15,7 @@ public class SalaPont extends Sala {
 				int tiradaAgilitat = numAleatoriTirada();
 				//si tiene exito --> TRUE
 
-				System.out.println("  [Pont] Tirada d'agilitat: " + tiradaAgilitat + " (necessites <= " + p.agilitat + ")");
+				System.out.println("[Pont] Tirada d'agilitat: " + tiradaAgilitat + " (necessites <= " + p.agilitat + ")");
 				
 				if(tiradaAgilitat <=  p.agilitat) {
 					System.out.println("Has conseguido cruzar el puente con éxito.");

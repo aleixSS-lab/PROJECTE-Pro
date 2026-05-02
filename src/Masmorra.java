@@ -91,7 +91,9 @@ public  class Masmorra {
             System.out.println();
         }
         System.out.println("& = tu   * = explorada   - = no explorada");
+        System.out.println();
         System.out.println("============================");
+        
     }
 
     //  Mostrar Opcions 
@@ -102,9 +104,10 @@ public  class Masmorra {
         Sala sala = Masmorra.getSalaActual();
         System.out.println( );
         System.out.println("Què vols fer?");
+        System.out.println("------------------");
         
         if (!sala.explorada) {
-            System.out.println("Explorar la sala.");
+            System.out.println("Explorar la sala. (Explorar)");
         }  
         System.out.println("Moure.");
         if (sala.monstre != null && sala.monstre.estaViu()) {
@@ -133,9 +136,10 @@ public  class Masmorra {
         	System.out.println();
         	
         	 System.out.println("Què vols fer?");
+        	 System.out.println("------------------");
              
              if (!sala.explorada) {
-                 System.out.println("Explorar la sala.");
+                 System.out.println("Explorar la sala. (Explorar)");
              }  
              System.out.println("Moure.");
              if (sala.monstre != null && sala.monstre.estaViu()) {
@@ -152,7 +156,7 @@ public  class Masmorra {
         
         
         
-        	if(escollirOpcio.equalsIgnoreCase("Explorar la sala")) {
+        	if(escollirOpcio.equalsIgnoreCase("Explorar")) {
         		Masmorra.explorar();
         	}
         	else if(escollirOpcio.equalsIgnoreCase("Moure")) {
@@ -164,12 +168,6 @@ public  class Masmorra {
         			personatge.atacar(sala.monstre);
         		}
         	}
-       
-        	
-        
-        
-       
-        teclado.close();
     }
     
     
@@ -205,15 +203,15 @@ public  class Masmorra {
      * - El personatge surt per un extrem de la masmorra
      */
     public static boolean haFinalitzat() {
-        if (!personatge.estaViu()) return true;
-        if (haSortit()) return true;
+        if (!personatge.estaViu()) { return true;}
+        if (haSortit()) { return true;}
         return false;
     }
 
     protected static boolean haSortit() {
-        int fila = personatge.posicio[0];
-        int col  = personatge.posicio[1];
-        return fila < 0 || fila >= files || col < 0 || col >= columnes;
+
+        if(getSalaActual() == null){return true;}
+        return false;
     }
 
 //    Ampliació
@@ -244,6 +242,7 @@ public  class Masmorra {
     public static Sala getSalaActual() {
         int fila = personatge.posicio[0];
         int col  = personatge.posicio[1];
+        
         // Guardem el rang per si de cas
         if (fila < 0 || fila >= files || col < 0 || col >= columnes) {
             return null;  // está fuera → ha salido de la masmorra

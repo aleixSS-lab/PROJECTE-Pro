@@ -19,7 +19,7 @@ public boolean intentarSortir(Personatge p) {
 		int tiradaForsa = numAleatoriTirada();
 		
 		//si tiene exito --> TRUE
-		System.out.println("  [Teranyina] Tirada de força: " + tiradaForsa + " (necessites <= " + p.forsa + ")");
+		System.out.println("[Teranyina] Tirada de força: " + tiradaForsa + " (necessites <= " + p.forsa + ")");
 
 		if(tiradaForsa <=  p.forsa) {
 			System.out.println(" Has superat la teranyina!");

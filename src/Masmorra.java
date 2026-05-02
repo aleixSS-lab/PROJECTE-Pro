@@ -98,80 +98,100 @@ public  class Masmorra {
 
     //  Mostrar Opcions 
 
-    public static void mostrarOpcions() {
-    	Scanner teclado = new Scanner(System.in);
-    	
-        Sala sala = Masmorra.getSalaActual();
-        System.out.println( );
-        System.out.println("Què vols fer?");
-        System.out.println("------------------");
-        
-        if (!sala.explorada) {
+    public static void mostrarOpcions(Scanner teclado) {
+    
+
+    	if(!personatge.estaViu()) {
+    		causaMort = "Monstre";
+    	}
+    	else {
+
+    		Sala sala = Masmorra.getSalaActual();
+    		System.out.println( );
+    		System.out.println("Què vols fer?");
+    		System.out.println("------------------");
+
+    		mostrarExplorar();
+
+    		mostrarMoure();
+
+    		mostrarAtacar();
+
+    		System.out.println();
+    		System.out.print("Escull: ");
+
+    		//      MIRAR QUE A ESCOJIDO
+    		String escollirOpcio = teclado.next();
+    		System.out.println();
+
+    		//        HACER UN BUCLE || Si se pone bien verificar que a puesto || Si lo pone mal pedirle otra vez que escoja dandole las opciones otra vez
+
+    		int contadorErrores = 0;
+
+    		while(!escollirOpcio.equalsIgnoreCase("Explorar la sala") && !escollirOpcio.equalsIgnoreCase("Explorar")
+    				&& !escollirOpcio.equalsIgnoreCase("Moure") && !escollirOpcio.equalsIgnoreCase("Atacar")) {
+
+    			contadorErrores++;
+
+    			System.out.println("La teva opció no es una valida, torna a escollir.");
+    			System.out.println();
+
+    			System.out.println("Què vols fer?");
+    			System.out.println("------------------");
+
+    			mostrarExplorar();
+
+    			mostrarMoure();
+
+    			mostrarAtacar();
+
+    			System.out.println();
+    			System.out.print("Escull: ");
+    			escollirOpcio = teclado.next();
+    			System.out.println();
+    		}
+
+
+
+    		if(escollirOpcio.equalsIgnoreCase("Explorar")) {
+    			explorar();
+    		}
+    		else if(escollirOpcio.equalsIgnoreCase("Moure")) {
+
+    			personatge.moure();
+    		}
+    		else {
+    			if(escollirOpcio.equalsIgnoreCase("Atacar")) {
+    				personatge.atacar(sala.monstre);
+    				if (!personatge.estaViu()) { causaMort = "Monstre";
+    				}
+    			}
+    		}
+    	}
+    	}
+    
+    
+    //Mostrar
+    public static void mostrarAtacar() {
+    	if(getSalaActual().explorada) {
+    		if (getSalaActual().monstre != null && getSalaActual().monstre.estaViu()) {
+    			System.out.println("Atacar a " + getSalaActual().monstre.nom + " (vida: " + getSalaActual().monstre.vida + "). (Atacar)");
+    		}else {
+    			System.out.println("No hi ha monstres");
+    		}
+    	}
+    }
+    
+    public static void mostrarMoure() {
+    	  System.out.println("Moure.");
+    }
+    public static void mostrarExplorar() {
+    	if (!getSalaActual().explorada) {
             System.out.println("Explorar la sala. (Explorar)");
-        }  
-        System.out.println("Moure.");
-        if (sala.monstre != null && sala.monstre.estaViu()) {
-            System.out.println("Atacar a " + sala.monstre.nom + " (vida: " + sala.monstre.vida + "). (Atacar)");
-        }else {
-        	System.out.println("No hi ha monstres");
         }
-        
-        System.out.println();
-        System.out.print("Escull: ");
-        
-//      MIRAR QUE A ESCOJIDO
-        String escollirOpcio = teclado.next();
-        System.out.println();
-        
-//        HACER UN BUCLE || Si se pone bien verificar que a puesto || Si lo pone mal pedirle otra vez que escoja dandole las opciones otra vez
-        
-        int contadorErrores = 0;
-        
-        while(!escollirOpcio.equalsIgnoreCase("Explorar la sala") && !escollirOpcio.equalsIgnoreCase("Explorar")
-        		&& !escollirOpcio.equalsIgnoreCase("Moure") && !escollirOpcio.equalsIgnoreCase("Atacar")) {
-        	
-        	contadorErrores++;
-        	
-        	System.out.println("La teva opció no es una valida, torna a escollir.");
-        	System.out.println();
-        	
-        	 System.out.println("Què vols fer?");
-        	 System.out.println("------------------");
-             
-             if (!sala.explorada) {
-                 System.out.println("Explorar la sala. (Explorar)");
-             }  
-             System.out.println("Moure.");
-             if (sala.monstre != null && sala.monstre.estaViu()) {
-                 System.out.println("Atacar a " + sala.monstre.nom + " (vida: " + sala.monstre.vida + "). (Atacar)");
-             }else {
-             	System.out.println("No hi ha monstres");
-             }
-             
-             System.out.println();
-             System.out.print("Escull: ");
-             escollirOpcio = teclado.next();
-             System.out.println();
-        }
-        
-        
-        
-        	if(escollirOpcio.equalsIgnoreCase("Explorar")) {
-        		Masmorra.explorar();
-        	}
-        	else if(escollirOpcio.equalsIgnoreCase("Moure")) {
-        		
-        		Masmorra.personatge.moure();
-        	}
-        	else {
-        		if(escollirOpcio.equalsIgnoreCase("Atacar")) {
-        			personatge.atacar(sala.monstre);
-        		}
-        	}
     }
     
     
-
     // Accions principals 
 
     public static void explorar() {
@@ -205,6 +225,7 @@ public  class Masmorra {
     public static boolean haFinalitzat() {
         if (!personatge.estaViu()) { return true;}
         if (haSortit()) { return true;}
+        
         return false;
     }
 
@@ -356,9 +377,24 @@ public  class Masmorra {
 	//Pedir opciones al personatge y mostrar mazmorra
 
 	while(!haFinalitzat()) {
-		mostrarOpcions();
-		mostrarMasmorra();
+	    mostrarMasmorra();
+	    
+	    if(getSalaActual() == null) break;
+	    
+	    mostrarOpcions(teclado);
+	    
+	
+	    if(!personatge.estaViu()) {
+	        if(causaMort == null) causaMort = "Monstre";
+	        break; 
+	    }
+	    if(haSortit()) {
+	        break;
+	    }
 	}
+	
+	mostrarResultats();
+	teclado.close();
 	
 	
 	
@@ -367,20 +403,4 @@ public  class Masmorra {
 	
 }
 
-
-	//	El personaje comenzara en la sala de arriba a la izquierda de la mazmorra en cada turno se le dara 3 opciones al jugador.
-			//(while con contador de turno, cada turno se le dara las 3 opciones, hasta que el juego no se acabe el bucle no acabara)
-			
-	// El jugador pedira el metodo explorar en la sala que esta actualmente, onseguira el tesoro (si hay) y se lo pondra en su inventario (si es que tiene hueco)
-			//recorrer array para saber si esta ocupado, si no esta ocupado añadir en ultima posicion el equipamiento  
-			//equipament[] += "nombre Tesoro"
-			//si esta ocupado donar por consola que el equipamiento esta al maximo y no le cabe el tesoro.
-			
-			
-
-		
-    
-    
-
-    
 }

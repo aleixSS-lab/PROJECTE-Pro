@@ -14,7 +14,7 @@ public class Personatge extends Masmorra implements Combatent{
 
 
 	//Constructor
-		
+
 	public Personatge (String nomConsola) {
 		this.nom = nomConsola;
 		this.vida = generarVida();
@@ -51,41 +51,42 @@ public class Personatge extends Masmorra implements Combatent{
 	}
 
 	// METODOS DE LA INTERFICIE COMBATENT
-		//calcluarAtac() heredado de la interficie
-		//devuelve un numero aleatorio entre 1 i el valor del atac del personaje
+	//calcluarAtac() heredado de la interficie
+	//devuelve un numero aleatorio entre 1 i el valor del atac del personaje
 	public int calcularAtac() {
 		return (int) (Math.random() * (this.atac - 1 + 1) + 1);
 	}
 
- 	public void rebreDany(int quantitat) {
-        this.vida -= quantitat;
-        if (this.vida < 0) this.vida = 0;
-    }
+	public void rebreDany(int quantitat) {
+		this.vida -= quantitat;
+		if (this.vida < 0) this.vida = 0;
+	}
 
-    public boolean estaViu() {
-        return this.vida >= 0;
-    }
+	public boolean estaViu() {
+		return this.vida >= 0;
+	}	
 	// METODOS
-		//atacar(Monstre m) de tipo monstruo
+	//atacar(Monstre m) de tipo monstruo
 
-		//	El personatge calcula el dany del seu atac
+	//	El personatge calcula el dany del seu atac
 	public void atacar(Monstre m) {
 
 		System.out.println("- " + this.nom + " ataca al monstre " + m.nom + "!");
 
 		int danyPersonatge = this.calcularAtac();
-			//	El personatge fa el dany corresponent al monstre
+		//	El personatge fa el dany corresponent al monstre
 		System.out.println("- Has atacat i fet " + danyPersonatge + " punts de dany.");
-			//	El personatge fa el dany corresponent al monstre
+		//	El personatge fa el dany corresponent al monstre
 		m.rebreDany(danyPersonatge);
 
 		System.out.println("- " + this.nom + " ha atacat a " + m.nom + " i li ha fet " + danyPersonatge + " de dany. Vida restant del monstre: " + m.vida);
 
-			//	Si el monstre no ha mort, calcula el dany del seu atac
+		//	Si el monstre no ha mort, calcula el dany del seu atac
 		if (m.estaViu()) {
 			int danyMonstre = m.calcularAtac();
-			System.out.println("- El monstre sobreviu i et treu " + danyMonstre + " de vida. Punts de vida restants de " + nom + ": " + vida);
 			this.rebreDany(danyMonstre);
+			System.out.println("- El monstre sobreviu i et treu " + danyMonstre + " de vida. Punts de vida restants de " + nom + ": " + vida);
+			
 
 		} else {
 			//	Si en aquest atac es mata al monstre, se li sumarà al personatge un valor d’experiència igual al paràmetre valorExperiencia del monstre.
@@ -100,114 +101,117 @@ public class Personatge extends Masmorra implements Combatent{
 	//explorar() explorar la sala en la que se encuentra	
 	//	Explorar (si la sala encara no ha sigut explorada).
 	public void explorar(Sala s) {
-			//	Si la sala ja ha sigut explorada, el personatge no fa res.
+		//	Si la sala ja ha sigut explorada, el personatge no fa res.
 		if(s.explorada) {
 			System.out.println("Aquesta sala ja ha sigut explorada.");
 		}
 
 		// Si no ha estat desconeguda, el personatge la marca com a explorada i si hi ha un tresor, l’agafa i l’afegeix al seu equipament i si hi ha un monstre, el personatge es prepara per al combat.
-			s.explorada = true;
-			System.out.println("Explorant la sala...");
+		s.explorada = true;
+		System.out.println("Explorant la sala...");
 
-			// Si hi ha un tresor, l’agafa i l’afegeix al seu equipament
-			boolean afegit = false;
-			
+		// Si hi ha un tresor, l’agafa i l’afegeix al seu equipament
+		boolean afegit = false;
+
 		if(s.tresor != null) {
 			System.out.println("Has trobat un tresor!");
 			// Es recorre l'equipament per trobar un espai buit
 			for (int i = 0; i < equipament.length; i++) {
-				if(equipament[i] == null) {
+				if(equipament[i] == null && !afegit) {
 					equipament[i] = s.tresor;
 					System.out.println("Afegit a l'equipament! " + s.tresor);
 					afegit = true;
-					
-				}if(!afegit) {
-					System.out.println("L'equipament està ple!");
 				}
-		
-		}
-	} else {
+			}if(!afegit) {
+				System.out.println("L'equipament està ple!");
+			}
+		}else {
 			System.out.println("La sala no té cap tresor.");
 		}	
 		// Si hi ha un monstre, el personatge es prepara per al combat.
 		if(s.monstre != null && s.monstre.estaViu()) {
-			System.out.println("Has trobat un monstre!" + s.monstre);
+			System.out.println("Has trobat un monstre! " + s.monstre);
 		}
 	}
 
-	// moure(char direccio) el personaje se mueve en una direccion ('N','S','E' o 'O')
-		
+	// (char direccio) el personaje se mueve en una direccion ('N','S','E' o 'O')
+
 	public void moure() {
 		Scanner teclado = new Scanner(System.in);
 
 		System.out.print("Introdueix una direcció (N, S, E, O): ");
-			char direccio = teclado.next().charAt(0);
-			System.out.println( );
-			
+		char direccio = teclado.next().charAt(0);
+		System.out.println( );
+
 		//  Hacer un bucle para pedir que el usuario ingrese una dirección válida hasta que lo haga correctamente 
 		while(direccio!= 'N' && direccio != 'S' && direccio != 'E' && direccio != 'O') {
 			System.out.println("Direcció no vàlida. Utilitza N, S, E o O.");
 			direccio = teclado.next().charAt(0);
 			System.out.println( );
 		}
-		
+
 
 		Sala salaActual = getSalaActual();
+		Monstre monstreFugir = salaActual.monstre;
 
 		// S'executa el metode de intentarSoritr() de la sala actual.
 		boolean potSortir = salaActual.intentarSortir(Personatge.this);
-			if(potSortir) {
-				// FER ELS MOVIMENTS CORRESPONENTS A CADA DIRECCIÓ
+		if(potSortir) {
+			// FER ELS MOVIMENTS CORRESPONENTS A CADA DIRECCIÓ
 			switch (direccio) {
-				case 'N':
-					this.posicio[0]--;
-					break;
-				case 'S':
-					this.posicio[0]++;
-					break;
-				case 'E':
-					this.posicio[1]++;
-					break;
-				case 'O':
-					this.posicio[1]--;
-					break;
-		}	
-			Monstre monstreFugir = salaActual.monstre;
+			case 'N':
+				this.posicio[0]--;
+				break;
+			case 'S':
+				this.posicio[0]++;
+				break;
+			case 'E':
+				this.posicio[1]++;
+				break;
+			case 'O':
+				this.posicio[1]--;
+				break;
+			}	
+			if (!personatge.estaViu()) {
+			    causaMort = (causaMort != null) ? causaMort : "monstre";
 
-		if (monstreFugir != null && monstreFugir.estaViu()) {
-			
-			System.out.println("Hi havia un monstre viu a la sala! Tens penalització per fugida! Perds " + getSalaActual().monstre.penalitzacio + " de dany.");
-			this.vida -= getSalaActual().monstre.penalitzacio;
-			
-			if (this.vida <= 0) {
-				haFinalitzat();
-				causaMort = "Penalització de fugida, perdida total de vida.";
-				System.out.println("Has mort a causa de la penalització de fugida! Causa de mort: " + causaMort);
 			}
-			
-			System.out.println("Vida restant: " + this.vida);
-			this.rebreDany(getSalaActual().monstre.penalitzacio);
-			
-		}
 
-//			Si no es pot sortir:
+
+			if (monstreFugir != null && monstreFugir.estaViu()) {
+
+				System.out.println("Hi havia un monstre viu a la sala! Tens penalització per fugida! Perds " + monstreFugir.penalitzacio + " de dany.");
+				
+
+				if (!this.estaViu()) {
+					haFinalitzat();
+					causaMort = "Penalització de fugida, perdida total de vida.";
+					System.out.println("Has mort a causa de la penalització de fugida! Causa de mort: " + causaMort);
+				}
+
+				System.out.println("Vida restant: " + this.vida);
+				this.rebreDany(monstreFugir.penalitzacio);
+
+			}
+
+			//			Si no es pot sortir:
 		}
 		else{
-		System.out.println("No pots sortir d'aquesta sala! Intenta una altra direcció o explora la sala.");
+			System.out.println("No pots sortir d'aquesta sala! Intenta una altra direcció o explora la sala.");
 		}
-			
-		
+
+
 	}
-	
+
 
 	//ToString
-	
+
 	//nom, vida, agilitat, força, posicio dintre de la masmorra i tresors que te actualment al seu equipament
 	@Override
 	public String toString() {
 		return "Nom: " + nom + "|| Vida: " + vida + "|| Agilitat: " + agilitat + "|| Forsa: " + forsa + "|| Posició: {" + posicio[0] + "," + posicio[1] + "} || Equipament{ " + Arrays.toString(equipament) + " }";
 	}
 
-	
+
 
 }

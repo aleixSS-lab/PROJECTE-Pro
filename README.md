@@ -6,6 +6,5 @@ DAM 1M - PRO
 <a href="https://ansi-generator.pages.dev">Pagina utiliztada per els colors:</a>
 
 TODO
-  - Mirar el metodo explorar porque no hace de explora
-  - Mirar el metodo moure, si sale de la mazmorra hay error
+  -No se acaba cuando tiene 0 de vida. (cuando tiene 0 de vida ya se corta instantanio no se puede ejecutar nada mas el mostrarOpcions)
 

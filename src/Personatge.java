@@ -117,16 +117,16 @@ public class Personatge extends Masmorra implements Combatent{
 		boolean afegit = false;
 
 		if(s.tresor != null) {
-			System.out.println("Has trobat un tresor!");
+			System.out.println("- Has trobat un tresor!");
 			// Es recorre l'equipament per trobar un espai buit
 			for (int i = 0; i < equipament.length; i++) {
 				if(equipament[i] == null && !afegit) {
 					equipament[i] = s.tresor;
-					System.out.println("Afegit a l'equipament! " + s.tresor);
+					System.out.println("- Afegit a l'equipament! " + s.tresor);
 					afegit = true;
 				}
 			}if(!afegit) {
-				System.out.println("L'equipament està ple!");
+				System.out.println("- L'equipament està ple!");
 			}
 		}else {
 			System.out.println("La sala no té cap tresor.");

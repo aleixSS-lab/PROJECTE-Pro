@@ -77,7 +77,9 @@ public  class Masmorra {
     public static void mostrarMasmorra() {
     	System.out.println( );
     	
-        System.out.println("MASMORRA (" + files + "x" + columnes + ")");
+        System.out.println(" ------------- { MASMORRA (" + files + "x" + columnes + ") } ------------- ");
+        System.out.println( );
+        
         for (int i = 0; i < files; i++) {
             for (int j = 0; j < columnes; j++) {
                 if (personatge.posicio[0] == i && personatge.posicio[1] == j) {
@@ -109,7 +111,7 @@ public  class Masmorra {
     		Sala sala = Masmorra.getSalaActual();
     		System.out.println( );
     		System.out.println("Què vols fer?");
-    		System.out.println("------------------");
+    		System.out.println("------------------------------------------");
 
     		mostrarExplorar();
 
